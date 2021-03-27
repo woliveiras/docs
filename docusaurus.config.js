@@ -3,7 +3,7 @@ module.exports = {
   title: 'Ragu',
   tagline: 'It was never so simple to deliver a frontend!',
   url: 'https://ragu-framework.github.io/docs',
-  baseUrl: '/',
+  baseUrl: '/docs/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
