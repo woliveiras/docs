@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import {RaguComponentDemo} from "./ragu-component/ragu-component-demo";
 import CloseIcon from "../static/img/close-icon.png";
-import {RaguComponent} from "ragu-client-react";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+
 
 export const LoadMicroFrontend = ({name, url}) => {
   const [shouldLoad, setShouldLoad] = useState(false);
@@ -28,7 +29,13 @@ export const LoadMicroFrontend = ({name, url}) => {
           setLoaded(false);
           setShouldLoad(false);
         }}/>
-        <RaguComponent src={url} onFetchCompleted={() => setLoaded(true)}/>
+        <BrowserOnly>
+          {() => {
+            const {RaguComponent} = require('ragu-client-react');
+
+            return <RaguComponent src={url} onFetchCompleted={() => setLoaded(true)}/>
+          }}
+        </BrowserOnly>
       </div>
     }
   </div>
