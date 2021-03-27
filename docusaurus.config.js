@@ -6,7 +6,7 @@ module.exports = {
   baseUrl: '/docs/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'https://ragu-framework.github.io/favicon.ico',
   organizationName: 'ragu-framework', // Usually your GitHub org/user name.
   projectName: 'ragu', // Usually your repo name.
   themeConfig: {
