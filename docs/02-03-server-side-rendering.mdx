@@ -4,6 +4,7 @@ slug: /server-side-rendering
 ---
 import {PackageManager} from "../docs-components/PackageManager";
 
+`DRAFT`: This page is a draft page.
 
 To enable `SSR` you should provide the `--ssrEnabled` flag. With this flag Ragu will start to return the micro-frontend
 HTML rendered from server.
@@ -27,7 +28,7 @@ HTML rendered from server.
 After you activate the flag you will see a tiny difference into the micro-frontend's manifest file.
 When `SSR` is enabled, Ragu's manifest returns the `html` property which is the result of your application.
 
-## The state file (DRAFT)
+## The state file
 
 Let's say you want your micro-frontend to perform an async operation, let's say fetch a request. You can use
 a state file for this purpose. A state file is only executed from the server side, that means that the browser will
