@@ -3,6 +3,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Introduction',
+      collapsed: false,
       items: [
         '01-01-getting-started',
         '01-02-setting-up-workspace',
@@ -11,6 +12,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Core concepts',
+      collapsed: false,
       items: [
         '02-01-micro-frontends',
         '02-02-consuming-a-micro-frontend',

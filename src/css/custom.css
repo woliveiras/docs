@@ -21,6 +21,7 @@
   --ifm-heading-font-family: Poppins, sans-serif;
   --ifm-font-family-base: Poppins, sans-serif;
   --ifm-menu-color-background-active: transparent;
+  --ifm-menu-color-background-hover: transparent;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -86,7 +87,11 @@ body {
   font-weight: 300;
 }
 
-.menu__link.menu__link--sublist.menu__link--active {
+.menu__link:hover:not(.menu__link.menu__link--sublist) {
+  color: var(--ifm-link-hover-color);
+}
+
+.menu__link.menu__link--sublist.menu__link--active, .menu__link--sublist, .menu__link--sublist:hover {
   color: inherit;
 }
 
