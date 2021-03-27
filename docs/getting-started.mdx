@@ -1,0 +1,42 @@
+---
+title: Getting Started
+slug: /
+---
+import {RaguWebsiteLoader} from "../examples/ragu-website/Loader";
+
+## What is Ragu?
+
+Ragu aims to deliver a simple and coupleless way to organize your front-end
+into micro-frontends through front-end injection.
+
+You can create a micro-frontend using any technology and embed it into any
+application.
+
+Ragu can also optionally deliver your front-end with `SSR` (Server Side Rendering)
+and can deal with shared dependencies between micro-frontends making the user experience
+even better.
+
+## Front-end injection
+
+Ragu can inject a front-end made by any technology into any application.
+
+![Front-end injection](../static/img/front-end-injection.png)
+
+It is specially useful for legacy system modernization since you don't
+need to replace your entire application at once.
+
+
+### How it works?
+
+Have you ever looked at the Ragu's homepage code? There are multiple front-ends injected
+at that page. Ragu comes with a simple `cli` which builds your project and creates a `manifest`
+file.
+
+The `manifest` file contains all information needed to load that micro-frontend. You give the
+`manifest` for Ragu and it will load your micro-frontend.
+
+### Demo
+
+Let's go thought Ragu's homepage micro-frontends and inject them independently.
+
+<RaguWebsiteLoader />
