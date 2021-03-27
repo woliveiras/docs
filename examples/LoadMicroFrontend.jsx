@@ -4,36 +4,60 @@ import CloseIcon from "../static/img/close-icon.png";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 
 
-export const LoadMicroFrontend = ({name, url}) => {
+export const LoadMicroFrontend = ({name, url, hideDemo}) => {
   const [shouldLoad, setShouldLoad] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  const buttonLabel = () => {
+    if (failed) {
+      return `Fail to load "${url}" is the micro-frontend server running? Click to try again!`;
+    }
+
+    if (!shouldLoad) {
+      return `Click to load ${name} Micro-frontend here.`
+    }
+
+    return 'Loading...';
+  }
 
   return <div className="microfrontend">
     <h4>{name}</h4>
 
-    <RaguComponentDemo url={url}/>
+    {!hideDemo && <RaguComponentDemo url={url}/>}
 
     {
       !(shouldLoad && loaded) &&
       <div className="microfrontend-placeholder">
-        <button className="microfrontend-placeholder-button" onClick={() => setShouldLoad(true)}>
-          {shouldLoad ? 'Loading...' : `Load ${name} Micro-frontend`}
+        <button className={`microfrontend-placeholder-button ${failed ? 'failed' : ''}`} onClick={() => {
+          setLoaded(false);
+          setFailed(false);
+          setShouldLoad(true);
+        }}>
+          {buttonLabel()}
         </button>
       </div>
     }
 
     {
       shouldLoad &&
-      <div className="microfrontend-wrapper">
-        <img src={CloseIcon} className="microfrontend-close" onClick={() => {
+      <div className={loaded ? 'microfrontend-wrapper' : ''}>
+        {loaded && <img src={CloseIcon} className="microfrontend-close" onClick={() => {
           setLoaded(false);
           setShouldLoad(false);
-        }}/>
+        }}/>}
         <BrowserOnly>
           {() => {
             const {RaguComponent} = require('ragu-client-react');
 
-            return <RaguComponent src={url} onFetchCompleted={() => setLoaded(true)}/>
+            return <RaguComponent
+              src={url}
+              onFetchCompleted={() => setLoaded(true)}
+              onFetchFail={() => {
+                setShouldLoad(false);
+                setFailed(true);
+              }}
+            />
           }}
         </BrowserOnly>
       </div>

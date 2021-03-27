@@ -1,10 +1,8 @@
 ---
-title: Getting Started
+title: What is Ragu?
 slug: /
 ---
 import {RaguWebsiteLoader} from "../examples/ragu-website/Loader";
-
-## What is Ragu?
 
 Ragu aims to deliver a simple and coupleless way to organize your front-end
 into micro-frontends through front-end injection.
@@ -25,8 +23,15 @@ Ragu can inject a front-end made by any technology into any application.
 It is specially useful for legacy system modernization since you don't
 need to replace your entire application at once.
 
+## Key features
 
-### How it works?
+- Injects a front-end into any application easily. You can easily inject a front-end even into that your 15-year-old
+legacy code.
+- Gives more autonomy for teams since they don't need to share an entire front-end monolith.
+- Allows independently deployments since there is no need to update the main application when a micro-frontend has changed.
+- Ragu comes with a built-in server which can render your front-end from the server.
+
+## How it works?
 
 Have you ever looked at the Ragu's homepage code? There are multiple front-ends injected
 at that page. Ragu comes with a simple `cli` which builds your project and creates a `manifest`

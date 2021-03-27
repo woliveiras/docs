@@ -1,0 +1,39 @@
+---
+title: Server Side Rendering
+slug: /server-side-rendering
+---
+import {InstallPackage} from "../examples/InstallPackage";
+import {PackageManager} from "../examples/PackageManager";
+import {LoadMicroFrontend} from "../examples/LoadMicroFrontend";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+
+
+To enable `SSR` you should provide the `--ssrEnabled` flag. With this flag Ragu will start to return the micro-frontend
+HTML rendered from server.
+
+<PackageManager binExecution={true} both="ragu-cli dev --file my-mfe.js --ssrEnabled" />
+
+```json {8}
+{
+  "dependencies": [],
+  "client": "http://localhost:3100/compiled/client-side/my-mfe.[hash].js",
+  "ssrEnabled": false,
+  "static": false,
+  "styles": [],
+  "resolverFunction": "my-mfe_my-mfe",
+  "html": "Hello, World",
+  "state": null,
+  "props": {}
+}
+```
+
+After you activate the flag you will see a tiny difference into the micro-frontend's manifest file.
+When `SSR` is enabled, Ragu's manifest returns the `html` property which is the result of your application.
+
+## The state file (DRAFT)
+
+Let's say you want your micro-frontend to perform an async operation, let's say fetch a request. You can use
+a state file for this purpose. A state file is only executed from the server side, that means that the browser will
+never perform that action. Also, the state will be passed as a property to your micro-frontend.

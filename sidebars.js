@@ -2,9 +2,11 @@ module.exports = {
   docs: [
     {
       type: 'category',
-      label: 'Introduction',
+      label: 'Getting Started',
       items: [
-        'getting-started',
+        '01-01-getting-started',
+        '01-02-setting-up-workspace',
+        '01-03-server-side-rendering'
       ],
     },
   ],

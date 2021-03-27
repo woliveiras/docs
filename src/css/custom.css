@@ -58,11 +58,21 @@ body {
   color: var(--ifm-font-color-base);
 }
 
+.microfrontend-placeholder-button.failed {
+  color: #a74245;
+}
+
 .microfrontend-wrapper {
-  border-radius: 20px;
+  border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 50px rgba(0, 0, 0, 0.25);
   position: relative;
+  font-family: initial;
+  font-size: initial;
+  font-weight: initial;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
 }
 
 .microfrontend-close {
@@ -82,4 +92,28 @@ body {
 
 .navbar {
   box-shadow: 0 4px 50px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 1400px) {
+  .row .col.col.col {
+    --ifm-col-width: 100%;
+    flex-basis: var(--ifm-col-width);
+    margin-left: 0;
+    max-width: var(--ifm-col-width) !important;;
+  }
+}
+
+@media (min-width: 997px) and (max-width: 1320px) {
+  .docItemWrapper_node_modules-\@docusaurus-theme-classic-lib-next-theme-DocPage- {
+    max-width: 100% !important;
+  }
+}
+
+.alert {
+  color: black;
+}
+
+.admonition-icon svg {
+  fill: black;
+  stroke: black;
 }
