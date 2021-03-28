@@ -1,0 +1,11 @@
+{
+  "name": "receiving-params",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "ragu-cli": "^0.0.42",
+    "ragu-simple-adapter": "^0.0.13",
+    "webpack": "^5.28.0"
+  }
+}
