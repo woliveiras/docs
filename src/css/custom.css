@@ -23,6 +23,7 @@
   --ifm-menu-color-background-active: transparent;
   --ifm-menu-color-background-hover: transparent;
   --ifm-color-info: #b8deea;
+  --ifm-color-danger: #e2b3b5;
 }
 
 h1, h2, h3, h4, h5, h6 {

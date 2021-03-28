@@ -11,12 +11,10 @@ import CodeBlock from '@theme/CodeBlock';
 
 
 This guide explains how to set up your environment using the `ragu-cli` tool.
-It includes installing the CLI, creating an initial workspace and simple micro-frontend,
-and running that app locally to verify your setup.
+It includes installing the CLI, creating an initial workspace and simple micro-frontend.
+Also, this guide explains how to run the micro-frontend locally.
 
-## `optional` Start a Node project
-
-If you don't have a project yet open your terminal and follow the steps bellow:
+## Start a Node project
 
 <Tabs
   defaultValue="yes"
@@ -25,14 +23,15 @@ If you don't have a project yet open your terminal and follow the steps bellow:
     {label: 'Tell me how to start one', value: 'no'},
   ]}>
   <TabItem value="yes">
-    Nice 😎! Follow the next steps then.
+
   </TabItem>
   <TabItem value="no">
-    Create a directory.
+    <p>If you don't have a project yet <code>1</code> open your terminal and follow the steps bellow:</p>
+    <p><code>2</code> Create a directory.</p>
     <CodeBlock className="language-shell">mkdir my-mfe</CodeBlock>
-    Open the directory you have created.
+    <p><code>3</code> Open the directory you have created.</p>
     <CodeBlock className="language-shell">cd my-mfe</CodeBlock>
-    Create a node project
+    <p><code>4</code> Create a node project</p>
     <PackageManager npm="init" yarn="init" />
   </TabItem>
 </Tabs>
@@ -41,10 +40,11 @@ If you don't have a project yet open your terminal and follow the steps bellow:
 
 You use the ragu-cli to build micro-frontends, develop and preview your micro-frontend.
 
-To install the `ragu-cli`, open a terminal window and run the following command:
+To install the `ragu-cli`, execute the following command at the terminal:
 
 <InstallPackage isDev={true} packageName={'ragu-cli'} />
 
+### Webpack
 Ragu abstracts part of webpack configuration. It means that you should not worry about having a webpack config file if
 you don't use any special loader. However, webpack must be installed manually to make sure Ragu is using the same
 webpack version of your project. You can skip this step if you already have webpack installed.
@@ -53,13 +53,19 @@ webpack version of your project. You can skip this step if you already have webp
 
 ## Adapters
 
-`ragu-cli` needs to know how to build your project. You must have an adapter installed.
-For this example we will use the adapter for vanilla (a.k.a pure javascript) micro-frontends.
+Ragu is technology-agnostic. That means it can be used with any javascript framework. However,
+`ragu-cli` needs to know how to build your project. The adapters are how you can tell Ragu how to build the
+micro-frontend. For this example we will use the adapter for vanilla (a.k.a pure javascript) micro-frontends.
 
 <InstallPackage isDev={true} packageName={'ragu-simple-adapter'} />
 
 :::note
-All the examples bellow is about exporting a javascript pure micro-frontend. There is even a smooth way to work with your favorite framework. Check React's and Vue's documentation for more info.
+All the examples bellow are about exporting a javascript pure micro-frontend.
+There is even a smooth way to work with your favorite framework. Check React's and Vue's documentation for more info.
+:::
+
+:::info
+Does not install the simple adapter if you will use a framework. Install the framework adapter instead.
 :::
 
 ## Creating a simple component
@@ -108,6 +114,17 @@ Welcome to 🔪 Ragu
 Now you can use your micro-frontend wherever you want even here!
 
 <LoadMicroFrontend name="Your local micro-frontend" url="http://localhost:3100" hideDemo={true} />
+
+:::info
+Try to change the micro-frontend! You will see that changes will be reflected here!
+:::
+
+## Previewing your micro-frontend
+
+To preview your micro-frontend you just need to open the preview route that is printed at the terminal when you start
+the development server.
+
+The default micro-frontend route is [http://localhost:3100/preview](http://localhost:3100/preview)
 
 ## Check all available commands and options
 

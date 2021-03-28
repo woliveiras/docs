@@ -1,0 +1,18 @@
+{
+  "name": "example-01-02",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ragu-cli": "0.0.42"
+  },
+  "dependencies": {
+    "ragu-simple-adapter": "0.0.13",
+    "webpack": "^5.28.0"
+  }
+}
