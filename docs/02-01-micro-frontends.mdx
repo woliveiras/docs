@@ -2,10 +2,120 @@
 title: Micro-frontends
 slug: /micro-frontends
 ---
+import {RaguComponentDemo} from "../docs-components/ragu-component/ragu-component-demo";
 
-`DRAFT`: This page is a draft page.
-
-Coined at ThoughtWorks Technology Radar 2016' release. Micro-frontends aims to extend the micro-services ideas into the
+Coined at ThoughtWorks Technology Radar 2016' release. Micro-frontends extends the micro-services ideas into the
 front-end. Thought composition you can build a distributed front-end with independent deployment and with agnostic
 technology.
 
+Ragu provides a simple and sophisticated API to injects micro-frontend into any application. A Ragu micro-frontend is
+like a back-end API endpoint where other applications can use. Actually, Ragu micro-frontend usages seems a lot similar
+of using a back-end API.
+
+## The micro-frontend API
+
+Now that you have [setting up our front-end](/docs/setup) let's take a better look into the component API:
+
+```javascript title="my-mfe.js"
+export default () => {
+  return {
+    html: 'Hello, World'
+  }
+}
+```
+
+To inject the micro-frontend you need to provide the component `manifest` URL to one of the clients available.
+
+You can load your micro-frontend using the vanilla client as showed bellow where `http://localhost:3100`
+the `manifest` URL:
+
+```html
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/ragu-dom@latest/install.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <ragu-component src="http://localhost:3100"></ragu-component>
+</body>
+</html>
+```
+
+The previous example outputs a `Hello, World` micro-frontend. Let's say, instead of
+`Hello, World` we want to receive the name which the micro-frontend will say `Hello` to.
+
+# Receiving parameters
+
+The micro-frontend receives the name that must be shown by a parameter:
+
+```javascript title="my-mfe.js"
+export default ({params}) => {
+  return {
+    html: `Hello, ${params.name}`
+  }
+}
+```
+
+To inject the micro-frontend above you must provide the `params` as a `URL` query parameter:
+
+```html
+<ragu-component src="http://localhost:3100/?name=Universe"></ragu-component>
+```
+
+## Receiving parameters at the preview
+
+To receive props at the preview all you must provide them thought query parameters:
+
+[http://localhost:3100/preview?name=Universe](http://localhost:3100/preview?name=Universe)
+
+## Other properties
+
+There are few properties that is provided to a micro front-end. This section list them.
+
+### props.isServer
+
+When `true` means that this component is been rendered at the server side:
+
+```javascript title="my-mfe.js"
+export default ({params, isServer}) => {
+  return {
+    html: `Hello, ${params.name} from ${isServer ? 'server' : 'browser'}`
+  }
+}
+```
+
+
+### props.state
+
+This property is used to transit information from server to client. Read more at the Server Side Rendering section.
+
+### From client side
+
+The properties listed bellow are available when `isServer=false`.
+
+#### props.element
+
+The container where the micro-frontend will be injected.
+
+```javascript title="my-mfe.js"
+export default ({isServer, element}) => {
+  if (!isServer) {
+    element.addEventListener('click', () => alert('Thanks!'));
+  }
+
+  return {
+    html: `Click me`,
+  }
+}
+```
+
+### From server side
+
+The properties listed bellow are available when `isServer=true`.
+
+#### props.request
+
+The express request object: [https://expressjs.com/pt-br/api.html#req](https://expressjs.com/pt-br/api.html#req)
+
+#### props.config
+
+The [RaguServerConfig](https://github.com/ragu-framework/ragu/blob/main/ragu-server/src/config.ts#L34).
