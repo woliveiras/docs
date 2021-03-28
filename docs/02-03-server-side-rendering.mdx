@@ -4,8 +4,6 @@ slug: /server-side-rendering
 ---
 import {PackageManager} from "../docs-components/PackageManager";
 
-`DRAFT`: This page is a draft page.
-
 To enable `SSR` you should provide the `--ssrEnabled` flag. With this flag Ragu will start to return the micro-frontend
 HTML rendered from server.
 
@@ -30,6 +28,77 @@ When `SSR` is enabled, Ragu's manifest returns the `html` property which is the 
 
 ## The state file
 
-Let's say you want your micro-frontend to perform an async operation, let's say fetch a request. You can use
+Let's say you want your micro-frontend to perform an async operation, fetching a request for example. You can use
 a state file for this purpose. A state file is only executed from the server side, that means that the browser will
 never perform that action. Also, the state will be passed as a property to your micro-frontend.
+
+The state file must export a default function that returns a `Promise`.
+Properties received by the `state` function are the same described at
+[Micro-frontend API](/docs/micro-frontends#receiving-parameters).
+
+```javascript title="state.js"
+export default async ({params}) => {
+  if (!params.number) {
+    return null;
+  }
+
+  const pokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.number}`);
+  const pokemonResponseBody = await pokemonResponse.json();
+
+  return {
+    name: pokemonResponseBody.name
+  }
+}
+```
+
+The result will be provided to your micro-frontend as a query parameter.
+
+```javascript title="mfe.js"
+export default ({params, state}) => {
+  if (!params.number) {
+    return {
+      html: `You must provide the number parameter`
+    }
+  }
+
+  return {
+    html: `The pokemon number ${params.number} is called ${state.name}`
+  }
+}
+```
+
+It is important to know that the state function is always resolved at the server side. That means that the `PokéAPI`
+call will never be performed at the browser.
+
+## Executing the state file
+
+<PackageManager both="ragu-cli dev --file my-mfe.js --stateFile state.js --ssrEnabled" binExecution={true} />
+
+Open the preview route providing the number parameter:
+[http://localhost:3100/preview?number=1](http://localhost:3100/preview?number=1)
+
+Let's take a look at the manifest file: [http://localhost:3100/?number=1](http://localhost:3100/?number=1).
+
+```json {9,10,11}
+{
+  "dependencies": [],
+  "client": "http://localhost:3100/compiled/client-side/my-mfe.[hash].js",
+  "ssrEnabled": true,
+  "static": false,
+  "styles": [],
+  "resolverFunction": "my-mfe_my-mfe",
+  "html": "The pokemon number 1 is called bulbasaur",
+  "state": {
+    "name": "bulbasaur"
+  },
+  "props": {
+    "number": "1"
+  }
+}
+```
+The state file is there and that's how Ragu transits information between the server and client-side.
+
+:::info
+The state mechanism is the same for any framework. There always will be a state file, also the state will be provided by
+props at the micro-frontend function.
+:::

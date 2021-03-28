@@ -22,6 +22,7 @@
   --ifm-font-family-base: Poppins, sans-serif;
   --ifm-menu-color-background-active: transparent;
   --ifm-menu-color-background-hover: transparent;
+  --ifm-color-info: #b8deea;
 }
 
 h1, h2, h3, h4, h5, h6 {

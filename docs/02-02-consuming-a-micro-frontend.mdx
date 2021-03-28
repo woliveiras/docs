@@ -4,8 +4,6 @@ slug: /consuming-a-micro-frontend
 ---
 import {RaguWebsiteLoader} from "../docs-components/ragu-website/Loader";
 
-`DRAFT`: This page is a draft page.
-
 Ragu can inject a front-end made by any technology into any application.
 
 ![Front-end injection](../static/img/front-end-injection.png)
@@ -13,8 +11,11 @@ Ragu can inject a front-end made by any technology into any application.
 It is specially useful for legacy system modernization since you don't
 need to replace your entire application at once.
 
-### Demo
+### Injecting a micro-frontend
 
-Let's go thought Ragu's homepage micro-frontends and inject them independently.
+To inject a micro-frontend you must provide a `manifest` url for one of the available Ragu clients.
+
+Parameters should be passed as query parameters at the URL. Check it out some micro-frontends from Ragu's homepage been
+loaded here:
 
 <RaguWebsiteLoader />
