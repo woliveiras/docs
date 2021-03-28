@@ -2,7 +2,7 @@
 title: Micro-frontends
 slug: /micro-frontends
 ---
-import {RaguComponentDemo} from "../docs-components/ragu-component/ragu-component-demo";
+import {PackageManager} from "../docs-components/PackageManager";
 
 Coined at ThoughtWorks Technology Radar 2016' release. Micro-frontends extends the micro-services ideas into the
 front-end. Thought composition you can build a distributed front-end with independent deployment and with agnostic
@@ -61,6 +61,11 @@ To inject the micro-frontend above you must provide the `params` as a `URL` quer
 <ragu-component src="http://localhost:3100/?name=Universe"></ragu-component>
 ```
 
+:::info Code Example
+The example above can be found
+[here](https://github.com/ragu-framework/docs/tree/main/examples/example-02-01/receiving-params)
+:::
+
 ### Receiving parameters at the preview
 
 To receive props at the preview all you must provide them thought query parameters:
@@ -83,6 +88,23 @@ export default ({params, isServer}) => {
 }
 ```
 
+Run the project without enabling the `SSR`:
+
+<PackageManager both="ragu-cli dev --file my-mfe.js" binExecution={true} />
+
+After opening the preview route ([http://localhost:3100/preview?name=World](http://localhost:3100/preview?name=World))
+you must see `Hello, World from browser` at the browser.
+
+Now, enable the `SSR` and do the same:
+
+<PackageManager both="ragu-cli dev --file my-mfe.js --ssrEnabled" binExecution={true} />
+
+Open the preview route again. Now, instead of `from browser` you wil see `Hello, World from server`.
+
+:::info Code Example
+The example above can be found
+[here](https://github.com/ragu-framework/docs/tree/main/examples/example-02-01/is-server)
+:::
 
 ### props.state
 
@@ -108,6 +130,11 @@ export default ({isServer, element}) => {
   }
 }
 ```
+
+:::info Code Example
+The example above can be found
+[here](https://github.com/ragu-framework/docs/tree/main/examples/example-02-01/receiving-element)
+:::
 
 ### From server side
 
