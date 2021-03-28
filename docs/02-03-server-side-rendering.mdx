@@ -53,7 +53,7 @@ export default async ({params}) => {
 
 The result will be provided to your micro-frontend as a query parameter.
 
-```javascript title="mfe.js"
+```javascript title="my-mfe.js"
 export default ({params, state}) => {
   if (!params.number) {
     return {
@@ -101,4 +101,9 @@ The state file is there and that's how Ragu transits information between the ser
 :::info
 The state mechanism is the same for any framework. There always will be a state file, also the state will be provided by
 props at the micro-frontend function.
+:::
+
+:::info Code Example
+The example above can be found
+[here](https://github.com/ragu-framework/docs/tree/main/examples/example-02-03/state-file)
 :::
