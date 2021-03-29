@@ -29,6 +29,11 @@ For this reason, the `--baseUrl` is required.
 In the example above we are telling Ragu that the micro-frontend will be available at
 **<span>https://my-mfe</span>.my.org/**.
 
+:::info
+After you run the `build` it will output at the terminal the list of all micro-frontends manifest location
+where they will be available after the deployment. Take a look to ensure that the `--baseUrl` is configured properly.
+:::
+
 ### Production server
 
 To start the production server, you **must provide the same parameters** that were provided to the `ragu-cli build`
