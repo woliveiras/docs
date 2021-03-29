@@ -10,6 +10,9 @@ module.exports = {
   organizationName: 'ragu-framework', // Usually your GitHub org/user name.
   projectName: 'ragu', // Usually your repo name.
   themeConfig: {
+    googleAnalytics: {
+      trackingID: 'UA-179608896-1',
+    },
     colorMode: {
       defaultMode: 'dark',
       disableSwitch: false,
