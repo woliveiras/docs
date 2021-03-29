@@ -2,8 +2,14 @@
 title: Exposing a micro-frontend
 slug: /vue/exposing-a-micro-frontend
 ---
-import {RaguComponent} from "ragu-client-react";
+import {LoadMicroFrontend} from "../../docs-components/LoadMicroFrontend";
+
 
 `DRAFT`: This is a draft documentation.
 
-<RaguComponent src="https://ragu-framework.github.io/ragu-vue-server-adapter/quick-start.json" />
+<LoadMicroFrontend
+  url="https://ragu-framework.github.io/ragu-vue-server-adapter/quick-start.json"
+  hideDemo={true}
+  startShouldLoad={true}
+  closable={false}
+/>

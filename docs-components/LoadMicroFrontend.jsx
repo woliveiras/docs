@@ -4,8 +4,9 @@ import CloseIcon from "../static/img/close-icon.png";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 
 
-export const LoadMicroFrontend = ({name, url, hideDemo}) => {
-  const [shouldLoad, setShouldLoad] = useState(false);
+export const LoadMicroFrontend = ({name, url, hideDemo, startShouldLoad, closable}) => {
+  const isClosable = closable !== false;
+  const [shouldLoad, setShouldLoad] = useState(startShouldLoad || false);
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
 
@@ -42,7 +43,7 @@ export const LoadMicroFrontend = ({name, url, hideDemo}) => {
     {
       shouldLoad &&
       <div className={loaded ? 'microfrontend-wrapper' : ''}>
-        {loaded && <img src={CloseIcon} className="microfrontend-close" onClick={() => {
+        {loaded && isClosable && <img src={CloseIcon} className="microfrontend-close" onClick={() => {
           setLoaded(false);
           setShouldLoad(false);
         }}/>}
