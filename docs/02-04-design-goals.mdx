@@ -1,0 +1,62 @@
+---
+title: Design Goals
+slug: /design-goals
+---
+
+This section describes Ragu's design goals and its motivations. Ragu must be a simple and thin slice into your
+application. That means that it will not provide any custom API that is already offered by the browser. It is what
+makes Ragu simple to use and with a low learning curve.
+
+## Non complex parameter Rule
+
+As Ragu always injects components using the `manifest` file URL and `query parameters`. It turns unfeasible to provide
+complex objects to a micro-frontend. The reason behind this is that Ragu is not designed to expose simple
+front-end components such as a simple button.
+Ragu is designed to expose a **business unit** that can be used wherever you want.
+
+We recommend you to provide only few parameter and fetch the
+required information to render a micro-frontend from the back-end
+([read about the bff pattern](https://samnewman.io/patterns/architectural/bff/)).
+It makes your micro-frontends less coupled with the main application and
+increases the "reusability" of your micro-frontend.
+
+## No global state control or custom communication protocol
+
+Ragu does not provide any API to share state between micro-frontends. There are two main reasons for that:
+
+1. Share a global state creates a hard coupling between micro-frontends.
+2. The DOM API has a sweet way to handle micro-frontends communication.
+
+### Event-driven micro-services communication
+
+Let's say you have a micro-frontend that should `emit` an `event` when something happens, like, for example,
+a button click.
+
+```jsx
+const dispatchButtonClickEvent = () => {
+  window.dispatchEvent(new CustomEvent('button-clicked'))
+}
+
+export default () => {
+  return <button onClick={() => dispatchButtonClickEvent()}>
+    Click me
+  </button>;
+}
+```
+
+Then every other micro-frontend or even the main application can listen to this event:
+
+```js
+window.addEventListener('button-clicked', () => {
+  console.log('You clicked at the button!')
+})
+```
+
+No custom APIs, no complexity. Just the DOM API.
+
+## Ragu is suitable for SPAs but is not one!
+
+Most micro-frontend frameworks/libraries comes with a Route system for SPA support. Ragu allows you to inject it into
+any framework. It is specially helpful because you don't need to learn a new tool or replace an already built
+application to use micro-frontends. You can inject Ragu into your React application that uses `react-router` and
+it will work perfectly.

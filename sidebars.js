@@ -16,7 +16,8 @@ module.exports = {
       items: [
         '02-01-micro-frontends',
         '02-02-consuming-a-micro-frontend',
-        '02-03-server-side-rendering'
+        '02-03-server-side-rendering',
+        '02-04-design-goals'
       ],
     },
     {
