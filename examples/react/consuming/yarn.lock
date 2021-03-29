@@ -9614,10 +9614,10 @@ raf@^3.4.1:
   dependencies:
     performance-now "^2.1.0"
 
-ragu-cli@^0.0.42:
-  version "0.0.42"
-  resolved "https://registry.yarnpkg.com/ragu-cli/-/ragu-cli-0.0.42.tgz#c24310ed10c66adff611fc00617eafe2338f3cf1"
-  integrity sha512-N2DZLOo0pee2qE5lbnezGstW4scbnC7ifCwMeTMM1yMjACGBn2QND9w+uRM6ZxIjwQNPr4LRwQzg3ny9sU7NNg==
+ragu-cli@^0.0.43:
+  version "0.0.43"
+  resolved "https://registry.yarnpkg.com/ragu-cli/-/ragu-cli-0.0.43.tgz#4b701004ff65e0505f2f027ccd0baeafc1ef7c0a"
+  integrity sha512-xJ9odukxmmPoKwwd6EUsfDuwE+WbG6MZM/7IClfg1vJ7k4nVAH7nNy7LWoTAycXknB4HxWlFu1KpvMWXOOOBuw==
   dependencies:
     commander "^7.1.0"
     ragu-server "^0.0.82"
