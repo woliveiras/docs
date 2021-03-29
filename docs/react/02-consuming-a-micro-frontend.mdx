@@ -1,0 +1,110 @@
+---
+title: Consuming a micro-frontend
+slug: /react/consuming-a-micro-frontend
+---
+import {InstallPackage} from "../../docs-components/InstallPackage";
+import {PackageManager} from "../../docs-components/PackageManager";
+
+Ragu can inject a front-end made by any technology into any application. This article explains how to inject Ragu's
+micro-frontends into a React application. You must have a React project set up.
+If you don't have one, we recommend you to start one using
+[create-react-app](https://github.com/facebook/create-react-app).
+
+![Front-end injection](../../static/img/front-end-injection.png)
+
+## Installing the Client
+
+The `ragu-client-react` provides a React component to inject Ragu micro-frontends into any React application.
+
+<InstallPackage packageName="ragu-client-react" isDev={true} />
+
+## Injecting a micro-frontend
+
+To inject a micro-frontend you must provide a `manifest` url for one of the available Ragu clients.
+
+1. Create a simple "Hello, World" micro-frontend that will be injected into our React application.
+
+  ```jsx title="my-mfe.js"
+  export default () => <div>
+    Hello, World!
+  </div>
+  ```
+
+2. Now start the micro-frontend.
+
+  <PackageManager binExecution={true} both="ragu-cli dev --file my-mfe.js" />
+
+  This command outputs the follow:
+
+  ```
+  🗺 Component Routes:
+  ▸ my-mfe: http://localhost:3100/
+
+  🔭 Preview Routes:
+  ▸ my-mfe: http://localhost:3100/preview
+  ```
+
+  The **Component Routes** section printed at the terminal describes the `manifest`'s routes and that is the `URL` we
+  will use to fetch our micro-frontend.
+
+3. Load the micro-frontend using the `manifest` URL using `RaguComponent`.
+
+  ```jsx
+  import {RaguComponent} from "ragu-client-react";
+
+  const App = () => {
+    return <div>
+      <h1>My micro-frontend:</h1>
+      <RaguComponent src="http://localhost:3100" />
+    </div>;
+  }
+
+  export default App;
+  ```
+
+4. Start the application and see it live!
+
+  :::note Does not stop the micro-frontend server
+  You should keep the micro-frontend running when you start the main application. Otherwise, it will not work.
+  :::
+
+  :::info Code Example
+  The code of the examples above can be found [here](https://github.com/ragu-framework/docs/tree/main/examples/react/consuming).
+  :::
+
+### Providing props
+
+If you want to provide props to a micro-frontend you can just pass it as `query parameter`. If you want to provide a
+`name` parameter to the micro-frontend the `RaguComponent` should be called that way:
+
+```jsx
+import {RaguComponent} from "ragu-client-react";
+
+<RaguComponent src="http://localhost:3100/?name=World" />
+```
+
+:::note
+You can read more about providing props at the
+[Core concepts / Consuming a micro-frontend](http://localhost:3000/docs/consuming-a-micro-frontend#injecting-a-micro-frontend)
+section.
+:::
+
+### Advanced options and callbacks:
+
+```jsx
+import {RaguComponent} from "ragu-client-react";
+
+<RaguComponent
+  src="http://localhost:300"
+  onFetchFail={() => {
+    alert('I was called because it was not possible to reach the manifest file URL.');
+  }}
+  onFetchCompleted={() => {
+    alert('I was called because the manifest URL was called successfully.');
+  }}
+  onHydrateCompleted={() => {
+    alert('I was called because the render process was completed and the micro-frontend is ready to interact with.');
+  }}
+  wrapper='div'
+/>
+```

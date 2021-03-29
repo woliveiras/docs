@@ -22,9 +22,10 @@ module.exports = {
     {
       type: 'category',
       label: 'React',
-      collapsed: false,
+      collapsed: true,
       items: [
         'react/01-exposing-a-micro-frontend',
+        'react/02-consuming-a-micro-frontend',
       ],
     },
   ],
