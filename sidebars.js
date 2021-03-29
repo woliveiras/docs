@@ -30,6 +30,14 @@ module.exports = {
       ],
     },
     {
+      type: 'category',
+      label: 'Vue',
+      collapsed: true,
+      items: [
+        'vue/01-exposing-a-micro-frontend',
+      ],
+    },
+    {
       type: 'doc',
       id: '03-01-deployment',
     },
