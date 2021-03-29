@@ -19,5 +19,13 @@ module.exports = {
         '02-03-server-side-rendering'
       ],
     },
+    {
+      type: 'category',
+      label: 'React',
+      collapsed: false,
+      items: [
+        'react/01-exposing-a-micro-frontend',
+      ],
+    },
   ],
 };

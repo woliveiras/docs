@@ -1,0 +1,146 @@
+---
+title: Exposing a micro-frontend
+slug: /react/exposing-a-micro-frontend
+---
+import {PackageManager} from "../../docs-components/PackageManager";
+
+Ragu is completely compatible with React. This article will teach you how to expose a micro-frontend using react.
+You must have a react project set up. If you don't we recommend you to start one using
+[create-react-app](https://github.com/facebook/create-react-app).
+
+## Installing dependencies
+
+You must have both `ragu-cli` and `ragu-server-adapter` to expose your micro-frontends.
+
+
+<PackageManager
+  npm="install ragu-cli ragu-react-server-adapter --save-dev"
+  yarn="add ragu-cli ragu-react-server-adapter --dev"
+/>
+
+## The micro-frontend file
+
+The micro-frontend file follow the same guidelines described at the [Micro-frontends section](/micro-frontends) the
+only difference is that when using React you must `export` a `default` `function` that returns a React element.
+
+1. Create the micro-frontend file.
+
+  ```jsx title="my-mfe.js"
+  export default () => <div>
+    Hello, World!
+  </div>
+  ```
+
+2. Now use `ragu-cli` to start the development server:
+
+  <PackageManager binExecution={true} both="ragu-cli dev --file my-mfe.js" />
+
+3. Check the micro-frontend live [http://localhost:3100/preview](http://localhost:3100/preview)
+
+  :::info Code Example
+  The code of the examples above can be found [here](https://github.com/ragu-framework/docs/tree/main/examples/react/exposing).
+  :::
+
+### Exposing a React Component
+
+You also can return a React component.
+
+```jsx title="my-mfe.js"
+const HelloWorld = () => <div>
+  Hello, World!
+</div>
+
+export default () => <HelloWorld />
+```
+
+:::info Code Example
+The code of the examples above can be found [here](https://github.com/ragu-framework/docs/tree/main/examples/react/exposing-component).
+:::
+
+### Receiving Parameters
+
+The previous example outputs a `Hello, World` micro-frontend. Let's say, instead of
+`Hello, World` we want to receive the name which the micro-frontend will say `Hello` to.
+
+1. Create a micro-frontend file.
+  ```jsx title="my-mfe.js"
+  const HelloWorld = ({name}) => <div>
+    Hello, {name}!
+  </div>
+
+  export default ({params}) => <HelloWorld name={params.name} />
+  ```
+
+2. Start the ragu development server.
+
+  <PackageManager binExecution={true} both="ragu-cli dev --file my-mfe.js" />
+
+3. Open the preview page providing the name query parameter
+[http://localhost:3100/preview?name=Ragu](http://localhost:3100/preview?name=Ragu).
+
+  :::info Code Example
+  The code of the examples above can be found [here](https://github.com/ragu-framework/docs/tree/main/examples/react/receiving-params).
+  :::
+
+## Server Side Rendering
+
+To enable `SSR` you should provide the `--ssrEnabled` flag.
+With this flag Ragu will start to return the micro-frontend HTML rendered from server.
+
+:::note
+This section describes how to enable `SSR` at your React micro-frontend. For more information about Ragu and `SSR`
+take a look at the [Server Side Rendering section](/docs/server-side-rendering).
+:::
+
+## The state file
+
+Let's say you want your micro-frontend to perform an async operation, fetching a request for example. You can use
+a state file for this purpose.
+
+The state file must export a default function that returns a `Promise`.
+Properties received by the `state` function are the same described at
+[Micro-frontend API](/docs/micro-frontends#receiving-parameters).
+
+1. Create the state file
+
+  ```js title="state.js"
+  export default async ({params}) => {
+    if (!params.number) {
+      return null;
+    }
+
+    const pokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.number}`);
+    const pokemonResponseBody = await pokemonResponse.json();
+
+    return {
+      name: pokemonResponseBody.name
+    }
+  }
+  ```
+
+2. Receive the `state` into the micro-frontend function.
+
+  ```jsx title="my-mfe.js"
+  const HelloWorld = ({number, name}) => <div>
+    The pokemon number {number} is called {name}
+  </div>
+
+  export default ({params, state}) =>{
+    if (!params.number) {
+      return <div>You must specify a pokémon <strong>number</strong></div>
+    }
+
+    return <HelloWorld number={params.number} name={state.name} />;
+  }
+  ```
+
+3. Starts the development server using the `SSR` mode. <PackageManager binExecution={true} both="ragu-cli dev --file my-mfe.js --stateFile state.js --ssrEnabled" />
+4. Check the micro-frontend live [http://localhost:3100/preview?number=1](http://localhost:3100/preview?number=1)
+
+  :::note
+  The state is always executed the `server-side` it means that the state will always be null when `SSR` is not enabled.
+  :::
+
+  :::info Code Example
+  The code of the examples above can be found [here](https://github.com/ragu-framework/docs/tree/main/examples/react/state).
+  :::

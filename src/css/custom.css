@@ -9,6 +9,8 @@
 
 /* You can override the default Infima variables here. */
 :root {
+  --ifm-font-color-base: rgb(43, 51, 50);
+  --ifm-heading-color: var(--ifm-font-color-base);
   --ifm-color-primary: #a74267;
   --ifm-color-primary-dark: rgb(33, 175, 144);
   --ifm-color-primary-darker: rgb(31, 165, 136);
@@ -25,6 +27,29 @@
   --ifm-color-info: #b8deea;
   --ifm-color-danger: #e2b3b5;
   --ifm-alert-color: black;
+}
+
+html[data-theme='dark'] {
+  --ifm-font-color-base: white;
+  --ifm-color-primary: #fd83b0;
+  background-color: rgb(29, 36, 36);
+}
+
+html[data-theme='dark'] .menu__link--active.active {
+  background: rgba(215,55,113,0.6);
+  color: white;
+}
+
+html[data-theme='dark'] .menu__link--active.active:hover {
+  color: white;
+}
+
+.footer--dark {
+  background-color: rgb(43, 51, 50);
+}
+
+.navbar__title {
+  color: white;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -99,7 +124,8 @@ body {
 }
 
 .navbar {
-  box-shadow: 0 4px 50px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(86.92deg, rgba(215,55,113,0.6) 5.1%, rgba(255, 255, 255, 0) 97.29%), rgba(246,183,41,0.6);
+  backdrop-filter: blur(6px);
 }
 
 @media (max-width: 1400px) {
@@ -121,7 +147,17 @@ body {
   color: black;
 }
 
+.admonition h5 {
+  color: black;
+}
+
 .admonition-icon svg {
   fill: black;
   stroke: black;
+}
+
+li::marker {
+  color: var(--ifm-code-color);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: var(--ifm-code-font-size);
 }

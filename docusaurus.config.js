@@ -10,13 +10,18 @@ module.exports = {
   organizationName: 'ragu-framework', // Usually your GitHub org/user name.
   projectName: 'ragu', // Usually your repo name.
   themeConfig: {
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: false,
+      respectPrefersColorScheme: true
+    },
     navbar: {
       title: 'Ragu Docs',
       items: [
       ],
     },
     footer: {
-      style: 'light',
+      style: 'dark',
       links: [
         {
           title: 'Docs',
@@ -46,6 +51,9 @@ module.exports = {
           ],
         },
       ],
+    },
+    prism: {
+      theme: require('prism-react-renderer/themes/vsDark'),
     },
   },
   presets: [

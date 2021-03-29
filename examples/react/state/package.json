@@ -1,0 +1,13 @@
+{
+  "name": "exposing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^17.0.2"
+  },
+  "devDependencies": {
+    "ragu-cli": "^0.0.42",
+    "ragu-react-server-adapter": "^0.0.26"
+  }
+}
