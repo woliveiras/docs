@@ -29,5 +29,9 @@ module.exports = {
         'react/02-consuming-a-micro-frontend',
       ],
     },
+    {
+      type: 'doc',
+      id: '03-01-deployment',
+    },
   ],
 };

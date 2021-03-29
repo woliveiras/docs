@@ -1,0 +1,74 @@
+---
+title: Deployment 🚀
+slug: /deployment
+---
+import {PackageManager} from "../docs-components/PackageManager";
+import {RaguComponentDemo} from "../docs-components/ragu-component/ragu-component-demo";
+
+When you are ready to deploy your micro-frontend to a remote server, `ragu-cli` will make it easy.
+
+## Building the project to production
+
+The `ragu-cli build` command creates a production ready build. You should specify the `--outputPath` directory and the
+`--baseUrl`.
+
+<PackageManager
+  binExecution={true}
+  both="ragu-cli build --file my-mfe.js --baseurl https://my-mfe.my.org/ --outputPath build" />
+
+:::info
+If you don't specify the `ouputPath` it will assume the default directory `.ragu-components`.
+:::
+
+### The `baseURL` 🚨
+
+Ragu micro-frontends can be deployed anywhere, and it does not need to be deployed at the same domain of the main
+application. The manifest should contain information about where to Ragu should retrieve the static files.
+For this reason, the `--baseUrl` is required.
+
+In the example above we are telling Ragu that the micro-frontend will be available at
+**<span>https://my-mfe</span>.my.org/**.
+
+### Production server
+
+To start the production server, you **must provide the same parameters** that were provided to the `ragu-cli build`
+command. Optionally you can provide a `--port` to define the port where Ragu server should listen to.
+
+<PackageManager
+  binExecution={true}
+  both="ragu-cli serve --file my-mfe.js --baseurl https://my-mfe.my.org/ --outputPath build --port 80"
+/>
+
+:::info
+By default Ragu listen to the port `3100` when a `--port` is not specified.
+:::
+
+## Static Build (a.k.a. CDN deployment)
+
+If your micro-frontend does not require any `SSR` feature ([Server Side Rendering section](/docs/server-side-rendering))
+you can use the static build. The static build does not require the Ragu serve and can be deployed at any CDN.
+
+To create a static build all you need is to change the previous build command from `build` to `static`.
+
+<PackageManager
+  binExecution={true}
+  both="ragu-cli static --file my-mfe.js --baseurl https://my-mfe.my.org/ --outputPath build" />
+
+Now you must deploy the content of the `build` directory into your static server/CDN in a way where the `build` path
+content should be available through at the defined `--baseurl`.
+
+#### Consuming a micro-frontend from static build
+
+The manifest file generated as a `json` file. The example above will generate a file called `build/my-mfe.json` which
+must be used as manifest file. For example:
+
+<RaguComponentDemo url={"https://my-mfe.my.org/my-mfe.json"} />
+
+:::warning
+When using static build all `SSR` features will be disabled. That means that state files will be ignored.
+:::
+
+### Ragu server x Static Build
+
+You should use Ragu server when you want to enable all the `SSR` power to your micro-frontends. Otherwise static build
+is just fine.
